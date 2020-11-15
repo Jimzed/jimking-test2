@@ -1,0 +1,29 @@
+# 配置参考 https://www.cnblogs.com/zyon/p/11023750.html
+server:
+  # 应用端口，Eureka服务端默认为：8761
+  port: 9098
+  servlet:
+    context-path: /test2
+
+spring:
+  application:
+    # 应用名称，将会显示在Eureka界面的应用名称列
+    name: test-demo
+
+eureka:
+  client:
+    service-url:
+      # Eureka服务器的地址，类型为HashMap，缺省的Key为 defaultZone；缺省的Value为 http://localhost:8761/eureka
+      # 如果服务注册中心为高可用集群时，多个注册中心地址以逗号分隔。
+      defaultZone: http://8.131.87.218:9010/eureka/
+  instance:
+    # 实例ID
+    instance_id: ${spring.cloud.client.hostname}:${server.port}:${spring.application.name}:@project.version@
+    # 服务续约（心跳）频率，单位：秒，缺省30
+    lease-renewal-interval-in-seconds: 30
+    # 服务失效时间，失效的服务将被剔除。单位：秒，默认：90
+    lease-expiration-duration-in-seconds: 90
+#    # 客户端在注册时使用自己的IP而不是主机名，缺省：false
+#    prefer-ip-address: true
+#    # 应用实例IP
+#    ip-address: 127.0.0.1
